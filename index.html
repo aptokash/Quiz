@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- ----------------------------------------------------------------------------------
+	Convert Ilearn format quizzes to new BrightSpace format 
+	
+ v1.1  2023/06/16  Supports WR, MC and TF questions, with #FBNOK 	
+ v1.2  2023/06/17  rename, cleanup, move to .js file
+ v1.3  2023/07/21  support for SA with multiple answers 
+ v1.3b 2023/07/24  new logo, better instructions 
+ v1.3c 2023/09/06  some formatting, and instruct to validate   
+ v1.4  2023/09/17  commas are OK!; questions with 2+ answers are MUTIPLE SELECT! 
+ v1.8  2023/11/27  now supports one comment ->  "//"  
+ v1.10 2024/02/03  option for commas 
+
+     ------------------------------------------------------------------------------------>
+<html>
+	
+<head> 	
+	<title id="title"> IL2BS </title>
+	<script type="text/javascript" src="IL2BS.js"></script>
+	<style>
+		h2,h3   { text-align: center;} 
+		body 	{ background-color: LemonChiffon;} 
+		.table1	{ background-color: DarkSeaGreen;}
+		td  	{ padding-left: 10px; padding-right: 10px;
+				  vertical-align: top; 	
+				}
+		.floatleft	{float:left; width:40%;} 
+		
+		.center  	{text-align: center;} 
+		
+		
+		.centerImg { display: block;
+					 border: 5px solid #555;
+					 margin-left: auto;   margin-right: auto;
+					 width: 25%;}
+		.red 	{ color:red;}
+	</style>
+</head>
+
+	
+<body onload="setversion()">	
+ 	<img src="IL2BS Header.jpg"  class='centerImg'> 
+	<p class="center" id="version" style="color:blue;">  
+	
+	<p id="error"> 
+	
+	<p class="center"> Do you want commas converted to semicolons? 	
+		<select id="convertCommas">
+			<option value="no"> No, enclose text in double quotes </option>
+			<option value="yes"> Yes, convert all commas to semi-colons </option>
+		</select>	
+			
+
+<div>	
+	<table class="table1"><tr> 
+	  <td> 	
+		<p class="center"> 
+			     Step 1: Paste your original ILearn text into this <strong> &darr; left &darr; </strong>  pane.
+			<br>  Then click: <button onclick="convert();"> Convert </button>   
+			<br> &nbsp; 
+			<br> <textarea id="input" rows=20 cols=80 ></textarea> 
+	  </td><td> 	
+		 <p class="center"> 
+			     Step 2: Copy converted text from this <strong> &darr; right &darr; </strong> pane.
+		    <br>  Paste into a TEXT file <em> (use NOTEPAD or similar text editor). </em>  
+		     <br> Save the file with a filetype of  <strong> "csv"! </strong> 	 
+	
+			<br> <textarea id="output" rows=20 cols=80 readonly ></textarea>
+    </tr><table>	
+</div>	
+	
+	<p id="message" class="center" style="color:blue"> </p> 
+	
+	<hr>
+	<p> Important Notes 
+	<ul> 	
+	<li> Follow the instructions carefully.  You MUST save the file as a <em> text </em>file. Do NOT save it as an Excel file!  
+	<li class="red"> Always double check the results to ensure the conversion worked as desired!   
+	<li> View BrightSpace's  <a href="IL2BS Sample BS Format.csv"> sample  csv file </a> showing ALL question formats.
+	<li> Review the list below for currently supported question formats.	
+			     Contact <a href="mailto:andrew.tokash@marist.edu">AndrewTokash@Marist.edu</a> to request others.
+	</ul>
+	
+		
+<hr>		
+<div style="border:thin">	
+ <pre>	
+1. (1 point)  What is the answer to this <b> short answer </b> question? 
+  * This is the answer!
+  #FBNOK: And this  is the feedback 
+
+2. (1 point)  What is the answer to this short answer question, which doesn't have a defined answer? 
+     And this question text spans multiple lines - 
+     this is a third line. 
+
+<b>// This is a comment - must be before the start of a question </b>
+Q3. This is  written question that  starts with "Q#" without a defined point (version 1.6).
+  * This is the answer!
+  But the answer can be multiple lines.
+  This is the third line of the answer. 
+
+4.(1 point)   This is short answer with multiple correct answers.
+   *answer 1 | answer 2 | answer 3
+  #FBNOK: Answers 1, 2 and 3 are correct.
+
+
+<b>// Here's another comment  - they start with "//" </b>
+Q5. (2 points)  Any question can specify POINTS (instead of POINT). (version 1.5) 
+   * This is the answer!
+   #FBNOK: And this  is the feedback 
+
+
+6. (1 point)   This is a multiple choice question.  
+   a. Answer A is incorrect
+   *b. the correct answer is B
+    c. Answer C is incorrect
+    d. Answer D is incorrect 
+ 
+Q7. (1 point)   This multiple choice question has three answers; points are divided. (version 1.4)  
+    *a. Answer A is correct
+        and the answer spans two lines   
+    *b. Answer B is also correct
+    *c. Answer C is also correct
+    d. Answer D is not 
+    #FBNOK: Both A, B and C are correct.
+
+
+8. (2 point)   This is a true/false question - worth TWO points! 
+    *true 
+    false 
+
+9. (1 point)   This is a true/false question, and note the comma. 
+     true 
+     *false 
+     #FBNOK: The actual answer is true
+  
+Q10. This, for testing, has commas, in all fields. 
+    *a. yes, a has a comma 
+	b. no, b has a comma, too
+    #FBNOK: The feedback, also, has a comma!  
+  
+  
+ </pre>
+<div> 
+    
+</html>	

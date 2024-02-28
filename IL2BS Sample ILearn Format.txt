@@ -1,0 +1,39 @@
+1. (1 point)  What is the answer to this short answer question? 
+  * This is the answer!
+  #FBNOK: And this  is the feedback 
+
+  2. (1 point)  What is the answer to this short answer question, which doesn't have a defined answer? 
+
+  3. (1 point)  This is a long questions with multiple lines. 
+    This is the second line.   
+    And this is a third line. 
+  * This is the answer!
+  #FBNOK: And this  is the feedback 
+
+  4. (1 point)  This is another written questions.
+  * This is the answer!
+  But the answer can be multiple lines.
+  This is the third line of the answer. 
+
+  5. (1 point)   This is a 
+  multiple choice question.  
+  a. Answer A is incorrect
+  *b. the correct answer is B
+  c. Answer C is incorrect
+  d. Answer D is incorrect 
+ 
+  6. (1 point)   This is a multiple choice question with three answers. 
+  *a. Answer A is correct
+  *b. Answer B is also correct
+  *c. Answer C is also correct
+  d. Answer D is not 
+  #FBNOK: Both A, B and C are correct.
+
+  7. (1 point)   This is a true/false question. 
+  *true 
+  false 
+
+  8. (1 point)   This is a true/false question, and note the comma. 
+  true 
+  *false 
+  #FBNOK: The actual answer is true
