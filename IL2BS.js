@@ -13,6 +13,7 @@
 //  V1.8  11/28/2023  allow one comment before question 
 //  V1.9  01/05/2024  error message is more probnounced 
 //  V1.10 02/03/2024  display questions with commas  
+//  V1.11 03/25/2024  now check MC questions for space between answer and "." 
 // ----------------------------------------------------------------------------------	
 //   loop through the input lines, for the current question, save the following info
 //        qText        -  the text of the question
@@ -29,11 +30,11 @@
 	function setversion(){  
 	   	
 	   	var version  = document.getElementById("version");
-	   	document.title    = "IL-to-BS 1.10"
+	   	document.title    = "IL-to-BS 1.11"
 	   						  
-		 version.innerHTML =  "    Version 1.10b   </b> " + 
-						      "<br> <small style='color: black;'> 01/05/2025  Error Message is more pronounced"  +
-						      "<br> <small style='color: black;'> Previous: supports 1 comment before question,  Supports 'Q#.' without '(1 point)'."  
+		 version.innerHTML =  "    Version 1.11   </b> " + 
+						      "<br> <small style='color: black;'> 03/25/2024  Added another warning check.";  
+						      
 						      
 	}	
 	
@@ -84,6 +85,15 @@
 			
 			if (thisline.substr(0,2) == "//") {NextComment = thisline.substr(2);} // v1.8
 			if (thisline.substr(0,2) == "//") continue;              // v1.8
+			
+			
+			if (thisline.substr(1,1) == " " & thisline.substr(2,1) == ".") {     // v1.11
+				errors += "Review question " + (qNumber+1) + ": there may be a space after the MC answer<br>";
+			}
+			if (thisline.substr(0,1) == "*" && thisline.substr(2,1) == " " & thisline.substr(3,1) == ".") {     // v1.11
+				errors += "Review question " + (qNumber+1) + ": there may be a space after the MC answer<br>";
+			}  
+			
 			
 			
 			
@@ -262,7 +272,10 @@
 		let d = new Date();
 		let t = d.toLocaleTimeString();
 
-		if (errors != "") { error.innerHTML  = "<b> <p style='color:red; text-align: center;'> &#9888; WARNING &#9888;  <br>" +  errors; + "</b>"	}   // v1.7
+		if (errors != "") { 
+				error.innerHTML   = "<b> <p style='color:red; text-align: center;'> &#9888; WARNING &#9888;  <br>" +  errors; + "</b>"
+				error2.innerHTML  = "<b> <p style='color:red; text-align: center;'> &#9888; WARNING &#9888;  <br>" +  errors; + "</b>"
+		}   // v1.7
 		
 	
 		message.innerHTML  = t.substr(0,t.indexOf(" ")) +
